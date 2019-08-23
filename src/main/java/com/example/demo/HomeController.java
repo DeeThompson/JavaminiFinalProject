@@ -9,29 +9,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
 public class HomeController {
 
     @Autowired
-   messageRepository messageRepository;
+    messageRepository messageRepository;
 
     @RequestMapping("/")
-    public String listMessages (Model model){
-        model.addAttribute ("messages", messageRepository.findAll());
-            return "list";
+    public String listMessages(Model model) {
+        model.addAttribute("messages", messageRepository.findAll());
+        return "list";
     }
 
 
     @GetMapping("/add")
-    public String messageForm (Model model){
+    public String messageForm(Model model) {
         model.addAttribute("message", new Message());
         return "messageform";
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Message message, BindingResult result){
+    public String processForm(@Valid Message message, BindingResult result) {
         if (result.hasErrors()) {
             return "messageform";
         }
@@ -39,5 +40,23 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/detail/{id}")
+    public String showMessage(@PathVariable("id") long id, Model model) {
+        model.addAttribute("message", messageRepository.findById(id).get());
+        return "show";
 
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateMessage(@PathVariable("id") long id, Model model) {
+        model.addAttribute("message", messageRepository.findById(id).get());
+        return "messageform";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delMessage(@PathVariable("id") long id) {
+         messageRepository.deleteById(id);
+        return "redirect:/";
+
+    }
 }

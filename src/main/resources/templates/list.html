@@ -9,7 +9,9 @@
 <a href="/add">Welcome to the App</a><br />
 <div th:each="message : ${messages}">
     <h4 th:inline="text">[[${message.content}]] postedby [[${message.sent}]] on [[${message.date}]]</h4>
-
+    <a th:href="@{/update/{id} (id=${message.id})}">Update</a> -
+    <a th:href="@{/detail/{id} (id=${message.id})}">Details</a> -
+    <a th:href="@{/delete/{id} (id=${message.id})}">Delete</a>
 </div>
 
 
