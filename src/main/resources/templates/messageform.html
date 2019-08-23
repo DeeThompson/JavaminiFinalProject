@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/process}" th:object="${message}" method="post">
+
+    Sent :<input type="text" th:field="*{sent}" />
+    <span th:if="${#fields.hasErrors('sent')}"
+          th:errors="*{sent}"></span><br />
+    Date :<input type="text" th:field="*{date}" />
+    <span th:if="${#fields.hasErrors ('date')}"
+          th:errors="*{date}"></span><br />
+
+    Content:<textarea rows="3" th:field="*{content}" />
+    <span th:if="${#fields.hasErrors('content')}"
+          th:errors="*{content}"></span>
+    <input type="submit" value="Submit" />
+
+</form>
