@@ -3,16 +3,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Title</title>
 </head>
 <body>
-<a href="/add">Welcome to the App</a><br />
-<div th:each="message : ${messages}">
-    <h4 th:inline="text">[[${message.content}]] postedby [[${message.sent}]] on [[${message.date}]]</h4>
-    <a th:href="@{/update/{id} (id=${message.id})}">Update</a> -
-    <a th:href="@{/detail/{id} (id=${message.id})}">Details</a> -
-    <a th:href="@{/delete/{id} (id=${message.id})}">Delete</a>
+<div class="container">
+    <div class="jumbotron" style="background-color:darkorchid;">
+        <h1 class="display-4"> Welcome to my App</h1>
+    </div>
+    <a href="/add">Welcome to the App</a><br />
+    <div th:each="message : ${messages}">
+        <h4 th:inline="text">[[${message.content}]] postedby [[${message.sent}]] on [[${message.date}]]</h4>
+        <a th:href="@{/update/{id} (id=${message.id})}">Update</a> -
+        <a th:href="@{/detail/{id} (id=${message.id})}">Details</a> -
+        <a th:href="@{/delete/{id} (id=${message.id})}">Delete</a>
+    </div>
+
 </div>
+
+
 
 
 </body>
